@@ -1,5 +1,6 @@
 // global vars
 const defaultValue = 24;
+let colorPicker;
 
 // selectors
 const container = document.getElementById('container');
@@ -7,8 +8,7 @@ const btnSquares = document.getElementById('btn-squares');
 const btnRestart = document.getElementById('btn-restart');
 const btnRainbow = document.getElementById('btn-rainbow');
 const btnBlack = document.getElementById('btn-black');
-// const colorPickerInput = document.getElementById('color-picker');
-// const colorPicker = document.getElementById('color-picker').value;
+const btnColorPick = document.getElementById('color-picker');
 
 // event listener
 btnSquares.addEventListener("click", function () {
@@ -16,6 +16,9 @@ btnSquares.addEventListener("click", function () {
 })
 btnRestart.addEventListener("click", function () {
     erase()
+})
+btnColorPick.addEventListener('change', (e) => {
+    colorPicker = e.target.value;
 })
 
 // make grid
@@ -51,15 +54,14 @@ function black() {
     })
 }
 
-// function colorPick() {
-//     const boxs = container.querySelectorAll('.grid-item')
-//     colorPickerInput.addEventListener('change', () => {
-//         boxs.forEach(box => box.addEventListener('mouseover', () => {
-//             box.style.backgroundColor = colorPicker;
-//         }))
-//     })
-// }
-
+function colorSelect() {
+    const boxs = container.querySelectorAll('.grid-item')
+    btnColorPick.addEventListener('click', () => {
+        boxs.forEach(box => box.addEventListener('mouseover', () => {
+            box.style.backgroundColor = colorPicker;
+        }))
+    })
+}
 
 
 // change size of grid
@@ -73,6 +75,7 @@ function howManySquares() {
         makeRows(user, user)
         rainbow()
         black()
+        colorSelect()
     }
 }
 
@@ -94,3 +97,4 @@ function erase() {
 makeRows(defaultValue, defaultValue)
 rainbow()
 black()
+colorSelect()
